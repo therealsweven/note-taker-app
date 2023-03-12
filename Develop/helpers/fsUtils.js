@@ -1,39 +1,45 @@
+//import fs and util
+
 const fs = require("fs");
 const util = require("util");
 
+// create promise object for fs.readFile
 const readFromFile = util.promisify(fs.readFile);
 
-const writeToFile = (destination, content) =>
-  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
-    err ? console.error(err) : console.info(`\nData written to ${destination}`)
+// function to save data to file
+const writeToFile = (file, note) =>
+  fs.writeFile(file, JSON.stringify(note, null, 4), (err) =>
+    err ? console.error(err) : console.info(`\nNotes data saved to ${file}`)
   );
 
-const readAndAppend = (content, file) => {
+//function to read data, add note, and rewrite data file
+const readAndAppend = (note, file) => {
   fs.readFile(file, "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
-      parsedData.push(content);
+      parsedData.push(note);
       writeToFile(file, parsedData);
     }
   });
 };
 
-const readAndDelete = (content, file) => {
-  console.log("delete function running");
+// function to read data, delete intended note, and rewrite data file
+const readAndDelete = (note, file) => {
+  //   console.log("delete function running");
   fs.readFile(file, "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
-      console.log(parsedData);
+      //   console.log(parsedData);
       for (i = 0; i < parsedData.length; i++) {
-        if (parsedData[i].id === content.id) {
+        if (parsedData[i].id === note.id) {
           const deleteIndex = i;
-          console.log(deleteIndex);
+          //   console.log(deleteIndex);
           parsedData.splice(deleteIndex, 1);
-          console.log(parsedData);
+          //   console.log(parsedData);
           writeToFile(file, parsedData);
           return;
         }
@@ -42,4 +48,5 @@ const readAndDelete = (content, file) => {
   });
 };
 
+// export fs helper functions
 module.exports = { readFromFile, writeToFile, readAndAppend, readAndDelete };
