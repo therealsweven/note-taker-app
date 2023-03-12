@@ -6,6 +6,9 @@
 
 This is a web application meant to be used to write and save notes. The backend of this app is designed to send the note data back and forth over an express server, tracking the data in a JSON file.
 
+![screenshot](./Develop/Screenshot1.png)
+![screenshot](./Develop/Screenshot2.png)
+
 ## Table of Contents
 
 - [Installation](#installation)
