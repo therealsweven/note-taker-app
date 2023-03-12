@@ -35,19 +35,19 @@ notes.post("/", (req, res) => {
 // DELETE Route for deleting a note
 notes.delete("/:id", (req, res) => {
   console.info(`${req.method} request received to delete note`);
-  console.log(req.params);
+  //   console.log(req.params);
   if (req.params.id) {
     const requestedNote = req.params.id;
     for (i = 0; i < notesData.length; i++) {
       if (requestedNote === notesData[i].id) {
-        console.log(notesData[i]);
+        // console.log(notesData[i]);
         const noteToDelete = notesData[i];
-        return noteToDelete;
+        console.log(noteToDelete);
+        readAndDelete(noteToDelete, "./db/db.json");
+        res.json(`Note deleted successfully 🚀`);
+        return;
       }
     }
-
-    readAndDelete(noteToDelete, "./db/db.json");
-    res.json(`Note deleted successfully 🚀`);
   } else {
     res.error("Error in deleting note");
   }

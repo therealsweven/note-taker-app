@@ -21,19 +21,23 @@ const readAndAppend = (content, file) => {
 };
 
 const readAndDelete = (content, file) => {
+  console.log("delete function running");
   fs.readFile(file, "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
-      for (i = 0; i < data.length; i++) {
-        if (data[i].id === content.id) {
+      console.log(parsedData);
+      for (i = 0; i < parsedData.length; i++) {
+        if (parsedData[i].id === content.id) {
           const deleteIndex = i;
-          return deleteIndex;
+          console.log(deleteIndex);
+          parsedData.splice(deleteIndex, 1);
+          console.log(parsedData);
+          writeToFile(file, parsedData);
+          return;
         }
       }
-      parsedData.remove(deleteIndex);
-      writeToFile(file, parsedData);
     }
   });
 };
