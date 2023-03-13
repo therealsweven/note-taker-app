@@ -40,7 +40,7 @@ notes.post("/", (req, res) => {
 // DELETE Route for deleting a note using route parameter as the unique ID
 notes.delete("/:id", (req, res) => {
   console.info(`${req.method} request received to delete note`);
-  //   console.log(req.params);
+  console.log(req.params);
   if (req.params.id) {
     const requestedNote = req.params.id;
     for (i = 0; i < notesData.length; i++) {

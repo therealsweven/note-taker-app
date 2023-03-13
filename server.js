@@ -6,7 +6,7 @@ const api = require("./routes/index");
 // assign value to declared PORT variable
 let PORT = process.env.PORT;
 if (PORT == null || PORT == "") {
-  port = 3001;
+  PORT = 3002;
 }
 const path = require("path");
 
