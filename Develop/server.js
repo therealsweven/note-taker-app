@@ -4,7 +4,10 @@ const express = require("express");
 const api = require("./routes/index");
 
 // assign value to declared PORT variable
-const PORT = 3002;
+let PORT = process.env.PORT;
+if (PORT == null || PORT == "") {
+  port = 3001;
+}
 const path = require("path");
 
 // import notes data
